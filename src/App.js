@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import WelcomePage from "./assets/components/WelcomePage";
+import WelcomePage from "./components/WelcomePage";
 import GlobalStyle from "./assets/css/GlobalStyle";
-import GamingPage from "./assets/components/GamingPage";
+import GamingPage from "./components/GamingPage";
 
 function App() {
   return (
