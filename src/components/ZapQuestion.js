@@ -67,7 +67,7 @@ export default function ZapQuestion({ questionIndex, card }) {
             questionFliped={questionFliped}
         >             
             <QuestionContent questionClicked={questionClicked} questionCurrentState={questionCurrentState} contentColor={contentColor}>
-                {questionClicked ? card.question: `Pergunta ${questionIndex}`}
+                {!questionClicked ? `Pergunta ${questionIndex}` : (questionFliped ? card.answer : card.question) }
             </QuestionContent>
 
             <QuestionIcon questionClicked={questionClicked} questionFliped={questionFliped}>
