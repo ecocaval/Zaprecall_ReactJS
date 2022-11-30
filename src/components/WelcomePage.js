@@ -8,6 +8,7 @@ export default function WelcomePage({ gameStarted, setGameStarted }) {
                 <img src={logo} />
                 <PageName>ZapRecall</PageName>
                 <RecallButton
+                    data-test="start-btn" 
                     onClick={() => setGameStarted(true)}
                 >
                     <p>Iniciar Recall!</p>

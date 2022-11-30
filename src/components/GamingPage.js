@@ -36,8 +36,8 @@ export default function GamingPage({ gameStarted, gameIsOver, setGameIsOver }) {
                 ))}
             </GamingPageMain>
 
-            <GamingPageFooter>
-                <AnswerCommentSection gameIsOver={gameIsOver}>
+            <GamingPageFooter data-test="footer">
+                <AnswerCommentSection data-test="finish-text" gameIsOver={gameIsOver}>
                     <div>
                         <img src={gotAnswersRight ? party : sad} />
                         <p>{gotAnswersRight ? 'Parabéns!' : 'Putz...'}</p>
@@ -49,8 +49,8 @@ export default function GamingPage({ gameStarted, gameIsOver, setGameIsOver }) {
                     {questionsAnswered}/{cards.length} CONCLUÍDOS
                 </p>
 
-                <AnswersIconsSection gameIsOver={gameIsOver} startedAnswering={!(questionsAnswered.length===0)}>
-                    {answersIcons.map((answer,index) => {
+                <AnswersIconsSection gameIsOver={gameIsOver} startedAnswering={!(questionsAnswered.length === 0)}>
+                    {answersIcons.map((answer, index) => {
                         return (
                             <img
                                 key={index}
