@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import logo from "./../assets/img/logo.png"
 
-export default function WelcomePage() {
-    return(
+export default function WelcomePage({ gameStarted, setGameStarted }) {
+    return (
         <>
-            <WelcomeSection>
-                <img src={logo}/>
+            <WelcomeSection gameStarted={gameStarted}>
+                <img src={logo} />
                 <PageName>ZapRecall</PageName>
-                <RecallButton><p>Iniciar Recall!</p></RecallButton>                
+                <RecallButton
+                    onClick={() => setGameStarted(true)}
+                >
+                    <p>Iniciar Recall!</p>
+                </RecallButton>
             </WelcomeSection>
         </>
     );
@@ -15,7 +19,7 @@ export default function WelcomePage() {
 
 const WelcomeSection = styled.section`
     height: 100vh;
-    display: flex;
+    display: ${props => !props.gameStarted ? "flex" : "none"};
     flex-direction: column;
     align-items: center;
     justify-content: center;

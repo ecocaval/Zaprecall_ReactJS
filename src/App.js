@@ -2,17 +2,18 @@ import styled from "styled-components";
 import WelcomePage from "./components/WelcomePage";
 import GlobalStyle from "./assets/css/GlobalStyle";
 import GamingPage from "./components/GamingPage";
+import { useState } from "react";
 
 function App() {
+
+  const [gameStarted, setGameStarted] = useState(false)
+
   return (
     <>
       <GlobalStyle/>
-
-      <Website>
-        
-        {/* <WelcomePage/> */}
-        <GamingPage/>
-        
+      <Website>        
+        <WelcomePage gameStarted={gameStarted} setGameStarted={setGameStarted}/>
+        <GamingPage gameStarted={gameStarted}/>        
       </Website>
     </>
   );

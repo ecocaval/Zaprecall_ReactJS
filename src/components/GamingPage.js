@@ -4,12 +4,12 @@ import logo from "./../assets/img/logo.png"
 import cards from "./info/cards"
 import ZapQuestion from "./ZapQuestion";
 
-export default function GamingPage() {
+export default function GamingPage({gameStarted}) {
 
     const [questionsAnswered, setQuestionsAnswered] = useState(0)
 
     return (
-        <>
+        <StyledSection gameStarted={gameStarted}>
             <GamingPageHeader>
                 <img src={logo} />
                 <h1>ZapRecall</h1>
@@ -30,9 +30,13 @@ export default function GamingPage() {
             <GamingPageFooter>
                 <p>{questionsAnswered}/{cards.length} Concluidos</p>
             </GamingPageFooter>
-        </>
+        </StyledSection>
     );
 }
+
+const StyledSection = styled.section`
+    display: ${props => (props.gameStarted ? "block" : "none")}
+`;
 
 const GamingPageMain = styled.main`
     height: 65vh;
