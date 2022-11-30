@@ -11,7 +11,7 @@ import icone_quase from "./../assets/img/icone_quase.png";
 
 export default function ZapQuestion(props) {
 
-    const { questionIndex, card, questionsAnswered, setQuestionsAnswered, answersIcons, setAnswersIcons} = props
+    const { questionIndex, card, numberOfAnswers, questionsAnswered, setQuestionsAnswered, answersIcons, setAnswersIcons, setGameIsOver} = props
 
     const [questionClicked, setQuestionClicked] = useState(false)
     const [questionFliped, setQuestionFliped] = useState(false)
@@ -44,6 +44,11 @@ export default function ZapQuestion(props) {
         setQuestionFliped(false)
         setQuestionCurrentState(status)
         setQuestionsAnswered(questionsAnswered + 1)
+
+        if(questionsAnswered + 1 === numberOfAnswers) {
+            setGameIsOver(true)
+        }
+        
         switch (status) {
             case 'wrong':
                 setQuestionIcon(icone_erro)

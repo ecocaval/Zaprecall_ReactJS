@@ -7,13 +7,14 @@ import { useState } from "react";
 function App() {
 
   const [gameStarted, setGameStarted] = useState(false)
+  const [gameIsOver, setGameIsOver] = useState(false)
 
   return (
     <>
       <GlobalStyle/>
       <Website>        
         <WelcomePage gameStarted={gameStarted} setGameStarted={setGameStarted}/>
-        <GamingPage gameStarted={gameStarted}/>        
+        <GamingPage gameStarted={gameStarted} gameIsOver={gameIsOver} setGameIsOver={setGameIsOver}/>        
       </Website>
     </>
   );
