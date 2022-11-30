@@ -48,7 +48,7 @@ export default function ZapQuestion(props) {
         if(questionsAnswered + 1 === numberOfAnswers) {
             setGameIsOver(true)
         }
-        
+
         switch (status) {
             case 'wrong':
                 setQuestionIcon(icone_erro)
@@ -70,11 +70,6 @@ export default function ZapQuestion(props) {
                 break;
         }
     }
-
-    console.log(`
-        questionIndex: ${questionIndex}
-        questionCurrentState = ${questionCurrentState}
-    `);
 
     return (
         <Question
