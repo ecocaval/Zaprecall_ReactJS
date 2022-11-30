@@ -18,6 +18,7 @@ export default function ZapQuestion(props) {
     const [questionIcon, setQuestionIcon] = useState(icone_erro)
     const [questionCurrentState, setQuestionCurrentState] = useState('')
     const [contentColor, setContentColor] = useState('#333333')
+    const [iconDataTest, seticonDataTest] = useState("play-btn")
 
     const iconCondition = (questionClicked ? seta_virar :
         (!questionCurrentState ? seta_play : questionIcon))
@@ -28,6 +29,7 @@ export default function ZapQuestion(props) {
             return
         }
         questionClicked ? setQuestionClicked(false) : setQuestionClicked(true);
+        seticonDataTest("turn-btn")
     }
 
     function flipQuestion() {
@@ -41,19 +43,22 @@ export default function ZapQuestion(props) {
         setQuestionClicked(false)
         setQuestionFliped(false)
         setQuestionCurrentState(status)
-        setQuestionsAnswered(questionsAnswered+1)
+        setQuestionsAnswered(questionsAnswered + 1)
         switch (status) {
             case 'wrong':
                 setQuestionIcon(icone_erro)
-                setContentColor('#FF3030') // set right color after
+                setContentColor('#FF3030')
+                seticonDataTest("no-icon")
                 break;
             case 'parcial':
                 setQuestionIcon(icone_quase)
-                setContentColor('#FF922E') // set right color after
+                setContentColor('#FF922E')
+                seticonDataTest("partial-icon")
                 break;
             case 'zap':
                 setQuestionIcon(icone_certo)
-                setContentColor('#2FBE34') // set right color after
+                setContentColor('#2FBE34')
+                seticonDataTest("zap-icon")
                 break;
         }
     }
@@ -65,23 +70,38 @@ export default function ZapQuestion(props) {
 
     return (
         <Question
+            data-test="flashcard"
             onClick={questionClick}
             questionClicked={questionClicked}
             questionFliped={questionFliped}
         >
-            <QuestionContent questionClicked={questionClicked} questionCurrentState={questionCurrentState} contentColor={contentColor}>
+            <QuestionContent
+                data-test="flashcard-text"
+                questionClicked={questionClicked}
+                questionCurrentState={questionCurrentState}
+                contentColor={contentColor}
+            >
                 {!questionClicked ? `Pergunta ${questionIndex}` : (questionFliped ? card.answer : card.question)}
             </QuestionContent>
 
-            <QuestionIcon questionClicked={questionClicked} questionFliped={questionFliped}>
-                <img src={iconCondition}
+            <QuestionIcon
+                questionClicked={questionClicked}
+                questionFliped={questionFliped}
+            >
+                <img
+                    data-test={iconDataTest}
+                    src={iconCondition}
                     onClick={flipQuestion}
                 />
             </QuestionIcon>
 
             <QuestionButtons questionFliped={questionFliped}>
                 {questionButtons.map((button, index) => (
-                    <QuestionButton key={index} onClick={() => buttonClick(button.status)}>
+                    <QuestionButton
+                        data-test={button.iconState}
+                        key={index}
+                        onClick={() => buttonClick(button.status)}
+                    >
                         <p>{button.content}</p>
                     </QuestionButton>
                 ))}
