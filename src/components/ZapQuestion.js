@@ -9,7 +9,9 @@ import icone_erro from "./../assets/img/icone_erro.png";
 import icone_certo from "./../assets/img/icone_certo.png";
 import icone_quase from "./../assets/img/icone_quase.png";
 
-export default function ZapQuestion({ questionIndex, card }) {
+export default function ZapQuestion(props) {
+
+    const { questionIndex, card, questionsAnswered, setQuestionsAnswered } = props
 
     const [questionClicked, setQuestionClicked] = useState(false)
     const [questionFliped, setQuestionFliped] = useState(false)
@@ -17,8 +19,8 @@ export default function ZapQuestion({ questionIndex, card }) {
     const [questionCurrentState, setQuestionCurrentState] = useState('')
     const [contentColor, setContentColor] = useState('#333333')
 
-    const iconCondition = (questionClicked ? seta_virar : 
-                          (!questionCurrentState ? seta_play : questionIcon))
+    const iconCondition = (questionClicked ? seta_virar :
+        (!questionCurrentState ? seta_play : questionIcon))
 
     function questionClick() {
         const questionWasAnswered = (questionClicked || questionCurrentState)
@@ -39,6 +41,7 @@ export default function ZapQuestion({ questionIndex, card }) {
         setQuestionClicked(false)
         setQuestionFliped(false)
         setQuestionCurrentState(status)
+        setQuestionsAnswered(questionsAnswered+1)
         switch (status) {
             case 'wrong':
                 setQuestionIcon(icone_erro)
@@ -51,7 +54,7 @@ export default function ZapQuestion({ questionIndex, card }) {
             case 'zap':
                 setQuestionIcon(icone_certo)
                 setContentColor('#2FBE34') // set right color after
-            break;
+                break;
         }
     }
 
@@ -65,17 +68,17 @@ export default function ZapQuestion({ questionIndex, card }) {
             onClick={questionClick}
             questionClicked={questionClicked}
             questionFliped={questionFliped}
-        >             
+        >
             <QuestionContent questionClicked={questionClicked} questionCurrentState={questionCurrentState} contentColor={contentColor}>
                 {!questionClicked ? `Pergunta ${questionIndex}` : (questionFliped ? card.answer : card.question)}
             </QuestionContent>
 
             <QuestionIcon questionClicked={questionClicked} questionFliped={questionFliped}>
-                <img src={iconCondition} 
-                onClick={flipQuestion} 
+                <img src={iconCondition}
+                    onClick={flipQuestion}
                 />
             </QuestionIcon>
-            
+
             <QuestionButtons questionFliped={questionFliped}>
                 {questionButtons.map((button, index) => (
                     <QuestionButton key={index} onClick={() => buttonClick(button.status)}>
@@ -118,6 +121,7 @@ const QuestionIcon = styled.figure`
     justify-content: flex-end;
     width: ${props => props.questionClicked ? "100%" : "auto"};
     display: ${props => props.questionFliped ? "none" : "flex"};
+
     > img {
         width: ${props => props.questionClicked ? "25px" : "auto"};
     }
@@ -132,9 +136,11 @@ const QuestionButtons = styled.span`
     > button:nth-child(1) {
         background: #FF3030;
     }
+
     > button:nth-child(2) {
         background: #FF922E;
     }
+    
     > button:nth-child(3) {
         background: #2FBE34;
     }
@@ -146,6 +152,7 @@ const QuestionButton = styled.button`
     border-radius: 5px;
     border: none;
     padding: 0px 10px;
+
     > p {
         font-family: 'Recursive';
         font-weight: 400;

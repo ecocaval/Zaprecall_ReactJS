@@ -1,22 +1,34 @@
+import { useState } from "react";
 import styled from "styled-components";
 import logo from "./../assets/img/logo.png"
 import cards from "./info/cards"
 import ZapQuestion from "./ZapQuestion";
 
 export default function GamingPage() {
-    return(
+
+    const [questionsAnswered, setQuestionsAnswered] = useState(0)
+
+    return (
         <>
             <GamingPageHeader>
-                <img src={logo}/>
+                <img src={logo} />
                 <h1>ZapRecall</h1>
             </GamingPageHeader>
-            
+
             <GamingPageMain>
-                {cards.map((card, index) => (<ZapQuestion key={index+1} questionIndex={index+1} card={card}/>))}
+                {cards.map((card, index) => (
+                    <ZapQuestion
+                        key={index + 1}
+                        questionIndex={index + 1}
+                        card={card}
+                        questionsAnswered={questionsAnswered}
+                        setQuestionsAnswered={setQuestionsAnswered}
+                    />
+                ))}
             </GamingPageMain>
-            
+
             <GamingPageFooter>
-                <p>X/X Concluidos</p>
+                <p>{questionsAnswered}/{cards.length} Concluidos</p>
             </GamingPageFooter>
         </>
     );
