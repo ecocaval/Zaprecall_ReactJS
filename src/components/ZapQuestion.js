@@ -11,7 +11,7 @@ import icone_quase from "./../assets/img/icone_quase.png";
 
 export default function ZapQuestion(props) {
 
-    const { questionIndex, card, questionsAnswered, setQuestionsAnswered } = props
+    const { questionIndex, card, questionsAnswered, setQuestionsAnswered, answersIcons, setAnswersIcons} = props
 
     const [questionClicked, setQuestionClicked] = useState(false)
     const [questionFliped, setQuestionFliped] = useState(false)
@@ -49,16 +49,19 @@ export default function ZapQuestion(props) {
                 setQuestionIcon(icone_erro)
                 setContentColor('#FF3030')
                 seticonDataTest("no-icon")
+                setAnswersIcons([...answersIcons, icone_erro])
                 break;
             case 'parcial':
                 setQuestionIcon(icone_quase)
                 setContentColor('#FF922E')
                 seticonDataTest("partial-icon")
+                setAnswersIcons([...answersIcons, icone_quase])
                 break;
             case 'zap':
                 setQuestionIcon(icone_certo)
                 setContentColor('#2FBE34')
                 seticonDataTest("zap-icon")
+                setAnswersIcons([...answersIcons, icone_certo])
                 break;
         }
     }

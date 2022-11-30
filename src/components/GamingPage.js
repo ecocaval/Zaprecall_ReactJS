@@ -7,6 +7,7 @@ import ZapQuestion from "./ZapQuestion";
 export default function GamingPage({gameStarted}) {
 
     const [questionsAnswered, setQuestionsAnswered] = useState(0)
+    const [answersIcons, setAnswersIcons] = useState([])
 
     return (
         <StyledSection gameStarted={gameStarted}>
@@ -23,12 +24,24 @@ export default function GamingPage({gameStarted}) {
                         card={card}
                         questionsAnswered={questionsAnswered}
                         setQuestionsAnswered={setQuestionsAnswered}
+                        answersIcons={answersIcons}
+                        setAnswersIcons={setAnswersIcons}
                     />
                 ))}
             </GamingPageMain>
 
             <GamingPageFooter>
                 <p>{questionsAnswered}/{cards.length} Concluidos</p>
+                <AnswersIconsSection>
+                    {answersIcons.map((answer) => {
+                        return (
+                            <img
+                                data-test=''
+                                src={answer}
+                            />
+                        );
+                    })}
+                </AnswersIconsSection>
             </GamingPageFooter>
         </StyledSection>
     );
@@ -65,6 +78,7 @@ const GamingPageHeader = styled.header`
 
 const GamingPageFooter = styled.footer`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -79,6 +93,11 @@ const GamingPageFooter = styled.footer`
         font-family: 'Recursive';
         font-weight: 400;
         font-size: 18px;
+        margin-bottom: 6px;
         color: #333333;
     }
 `;
+
+const AnswersIconsSection = styled.section`
+    
+`
