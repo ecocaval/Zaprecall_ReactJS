@@ -5,6 +5,8 @@ import ZapQuestion from "./ZapQuestion";
 import logo from "./../assets/img/logo.png"
 import party from "./../assets/img/party.png"
 import icone_erro from "./../assets/img/icone_erro.png";
+import icone_certo from "./../assets/img/icone_certo.png";
+import icone_quase from "./../assets/img/icone_quase.png";
 import sad from "./../assets/img/sad.png"
 
 export default function GamingPage({ gameStarted, gameIsOver, setGameIsOver }) {
@@ -51,10 +53,23 @@ export default function GamingPage({ gameStarted, gameIsOver, setGameIsOver }) {
 
                 <AnswersIconsSection gameIsOver={gameIsOver} startedAnswering={!(questionsAnswered.length === 0)}>
                     {answersIcons.map((answer, index) => {
+                        let dataTestContent = "";
+
+                        switch (answer) {
+                            case icone_erro:
+                                dataTestContent = "no-icon"        
+                                break;
+                            case icone_certo:
+                                dataTestContent = "zap-icon"
+                                break;
+                            case icone_quase:
+                                dataTestContent = "partial-icon"
+                                break;
+                        }
                         return (
                             <img
                                 key={index}
-                                data-test=''
+                                data-test={dataTestContent}
                                 src={answer}
                             />
                         );
